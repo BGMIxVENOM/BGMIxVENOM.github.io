@@ -1,47 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Pritam | Cyber Developer</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0f0f0f;
-      color: #00ff88;
-      font-family: Arial;
-      text-align: center;
-      padding-top: 100px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>气VENØM三ノ乙 | Portfolio</title>
 
-    h1 {
-      font-size: 40px;
-    }
+<style>
+body {
+    margin: 0;
+    background: #0f0f0f;
+    color: #00ff88;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+}
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #00ff88;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.container {
+    animation: fadeIn 1.5s ease-in-out;
+}
 
-    button:hover {
-      background: white;
-    }
-  </style>
+h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #aaaaaa;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background: #00ff88;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #00cc6a;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ff88;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
+
 <body>
 
-  <h1>Hello, I'm Pritam 👾</h1>
-  <p>Cybersecurity Learner | Android Modder | Future Ethical Hacker</p>
+<div class="container">
+    <h1>Hi, I'm 气VENØM三ノ乙</h1>
+    <p>Learning, building, and experimenting with code & security.</p>
 
-  <button onclick="hello()">Click Me</button>
+    <div class="buttons">
+        <a href="http://t.me/BGMI_X_VENOM" target="_blank">
+            <button>Telegram Channel</button>
+        </a>
 
-  <script>
-    function hello() {
-      alert("Website built by BGMixVENOM 🔥");
-    }
-  </script>
+        <a href="https://github.com/BGMIxVENOM" target="_blank">
+            <button>GitHub Profile</button>
+        </a>
+    </div>
+</div>
 
 </body>
 </html>
