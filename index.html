@@ -6,42 +6,83 @@
 <title>气VENØM三ノ乙 | Portfolio</title>
 
 <style>
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     background: #0f0f0f;
     color: #00ff88;
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+/* Animated background */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,255,136,0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveBg 20s linear infinite;
+    z-index: -1;
+}
+
+@keyframes moveBg {
+    from { transform: translate(0,0); }
+    to { transform: translate(-40px,-40px); }
 }
 
 .container {
-    animation: fadeIn 1.5s ease-in-out;
+    text-align: center;
+    padding: 60px 20px;
 }
 
-h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
+/* Profile image */
+.profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 3px solid #00ff88;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px #00ff88;
+}
+
+/* Typing effect */
+.typing {
+    font-size: 38px;
+    margin-bottom: 15px;
+    border-right: 3px solid #00ff88;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 3s steps(30,end) forwards,
+               blink 0.7s infinite;
+}
+
+@keyframes typing {
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
 }
 
 p {
-    color: #aaaaaa;
+    color: #aaa;
     margin-bottom: 30px;
 }
 
+/* Buttons */
 .buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
-}
-
-a {
-    text-decoration: none;
+    margin-bottom: 40px;
 }
 
 button {
@@ -56,14 +97,61 @@ button {
 }
 
 button:hover {
-    background: #00cc6a;
     transform: scale(1.05);
     box-shadow: 0 0 15px #00ff88;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* About section */
+.about {
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Skills bars */
+.skill {
+    margin: 15px auto;
+    max-width: 400px;
+    text-align: left;
+}
+
+.skill-name {
+    margin-bottom: 5px;
+}
+
+.skill-bar {
+    background: #222;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.skill-level {
+    height: 10px;
+    background: #00ff88;
+    width: 0;
+    animation: loadSkill 2s forwards;
+}
+
+.skill1 { animation-delay: 0.5s; }
+.skill2 { animation-delay: 1s; }
+.skill3 { animation-delay: 1.5s; }
+
+@keyframes loadSkill {
+    to { width: 80%; }
+}
+
+/* Terminal intro */
+.terminal {
+    background: #111;
+    border: 1px solid #00ff88;
+    padding: 15px;
+    max-width: 600px;
+    margin: auto;
+    font-family: monospace;
+    color: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
+    margin-bottom: 40px;
 }
 </style>
 </head>
@@ -71,18 +159,66 @@ button:hover {
 <body>
 
 <div class="container">
-    <h1>Hi, I'm 气VENØM三ノ乙</h1>
-    <p>Learning, building, and experimenting with code & security.</p>
 
-    <div class="buttons">
-        <a href="http://t.me/BGMI_X_VENOM" target="_blank">
-            <button>Telegram Channel</button>
-        </a>
+<!-- Profile Picture -->
+<img src="profile.jpg" class="profile-img">
 
-        <a href="https://github.com/BGMIxVENOM" target="_blank">
-            <button>GitHub Profile</button>
-        </a>
+<!-- Typing Intro -->
+<h1 class="typing">Hi, I'm 气VENØM三ノ乙</h1>
+
+<p>Learning, building, and experimenting with code & security.</p>
+
+<!-- Buttons -->
+<div class="buttons">
+    <a href="http://t.me/BGMI_X_VENOM" target="_blank">
+        <button>Telegram Channel</button>
+    </a>
+
+    <a href="https://github.com/BGMIxVENOM" target="_blank">
+        <button>GitHub Profile</button>
+    </a>
+</div>
+
+<!-- About Section -->
+<div class="about">
+    <h2>About Me</h2>
+    <p>
+        I'm passionate about cybersecurity, Android modification,
+        and experimenting with custom ROMs & kernels.
+        Currently exploring ethical hacking and advanced system tweaks.
+    </p>
+</div>
+
+<!-- Skills -->
+<div class="skill">
+    <div class="skill-name">Cybersecurity</div>
+    <div class="skill-bar">
+        <div class="skill-level skill1"></div>
     </div>
+</div>
+
+<div class="skill">
+    <div class="skill-name">HTML / CSS</div>
+    <div class="skill-bar">
+        <div class="skill-level skill2"></div>
+    </div>
+</div>
+
+<div class="skill">
+    <div class="skill-name">Android Modding</div>
+    <div class="skill-bar">
+        <div class="skill-level skill3"></div>
+    </div>
+</div>
+
+<!-- Terminal -->
+<div class="terminal">
+$ whoami <br>
+气VENØM三ノ乙 <br><br>
+$ status <br>
+Learning. Building. Evolving.
+</div>
+
 </div>
 
 </body>
