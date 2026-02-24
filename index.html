@@ -6,152 +6,147 @@
 <title>气VENØM三ノ乙 | Portfolio</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    background: #0f0f0f;
-    color: #00ff88;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
+body{
+    background:#0b0f14;
+    font-family:Arial, sans-serif;
+    color:#00ffcc;
+    text-align:center;
+    overflow-x:hidden;
 }
 
-/* Animated background */
-body::before {
-    content: "";
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0,255,136,0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: moveBg 20s linear infinite;
-    z-index: -1;
+/* Animated Grid Background */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:
+        radial-gradient(circle, rgba(0,255,204,0.08) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:moveBg 25s linear infinite;
+    z-index:-1;
 }
 
-@keyframes moveBg {
-    from { transform: translate(0,0); }
-    to { transform: translate(-40px,-40px); }
+@keyframes moveBg{
+    from{transform:translate(0,0);}
+    to{transform:translate(-40px,-40px);}
 }
 
-.container {
-    text-align: center;
-    padding: 60px 20px;
+.container{
+    padding:60px 20px;
 }
 
-/* Profile image */
-.profile-img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    border: 3px solid #00ff88;
-    margin-bottom: 20px;
-    box-shadow: 0 0 20px #00ff88;
+/* Profile Image */
+.profile-img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:3px solid #00ffcc;
+    box-shadow:0 0 25px #00ffcc;
+    margin-bottom:25px;
 }
 
-/* Typing effect */
-.typing {
-    font-size: 38px;
-    margin-bottom: 15px;
-    border-right: 3px solid #00ff88;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-    animation: typing 3s steps(30,end) forwards,
-               blink 0.7s infinite;
+/* Typing Effect */
+h1{
+    font-size:40px;
+    margin-bottom:15px;
 }
 
-@keyframes typing {
-    to { width: 100%; }
+.typing{
+    background:linear-gradient(90deg,#00ffcc,#00aaff);
+    -webkit-background-clip:text;
+    color:transparent;
+    border-right:3px solid #00ffcc;
+    padding-right:6px;
 }
 
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-p {
-    color: #aaa;
-    margin-bottom: 30px;
+/* Subtitle */
+.subtitle{
+    color:#aaa;
+    margin-bottom:35px;
+    font-size:18px;
 }
 
 /* Buttons */
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
+.buttons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:50px;
 }
 
-button {
-    padding: 12px 25px;
-    font-size: 16px;
-    background: #00ff88;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
+button{
+    padding:12px 25px;
+    font-size:15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#00ffcc;
+    transition:0.3s;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ff88;
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px #00ffcc;
 }
 
-/* About section */
-.about {
-    max-width: 700px;
-    margin: auto;
-    margin-bottom: 40px;
-    line-height: 1.6;
+/* About Section */
+.about{
+    max-width:700px;
+    margin:auto;
+    margin-bottom:50px;
+    line-height:1.6;
 }
 
-/* Skills bars */
-.skill {
-    margin: 15px auto;
-    max-width: 400px;
-    text-align: left;
+/* Skills */
+.skill{
+    max-width:500px;
+    margin:20px auto;
+    text-align:left;
 }
 
-.skill-name {
-    margin-bottom: 5px;
+.skill-name{
+    margin-bottom:5px;
 }
 
-.skill-bar {
-    background: #222;
-    border-radius: 20px;
-    overflow: hidden;
+.skill-bar{
+    background:#222;
+    border-radius:20px;
+    overflow:hidden;
 }
 
-.skill-level {
-    height: 10px;
-    background: #00ff88;
-    width: 0;
-    animation: loadSkill 2s forwards;
+.skill-level{
+    height:10px;
+    background:#00ffcc;
+    width:0;
+    animation:loadSkill 2s forwards;
 }
 
-.skill1 { animation-delay: 0.5s; }
-.skill2 { animation-delay: 1s; }
-.skill3 { animation-delay: 1.5s; }
+.skill1{animation-delay:0.5s;}
+.skill2{animation-delay:1s;}
+.skill3{animation-delay:1.5s;}
 
-@keyframes loadSkill {
-    to { width: 80%; }
+@keyframes loadSkill{
+    to{width:80%;}
 }
 
-/* Terminal intro */
-.terminal {
-    background: #111;
-    border: 1px solid #00ff88;
-    padding: 15px;
-    max-width: 600px;
-    margin: auto;
-    font-family: monospace;
-    color: #00ff88;
-    box-shadow: 0 0 10px #00ff88;
-    margin-bottom: 40px;
+/* Terminal */
+.terminal{
+    background:#0f141b;
+    border:1px solid #00ffcc;
+    padding:20px;
+    max-width:600px;
+    margin:50px auto;
+    font-family:monospace;
+    box-shadow:0 0 20px #00ffcc;
 }
 </style>
 </head>
@@ -160,58 +155,64 @@ button:hover {
 
 <div class="container">
 
-<!-- Profile Picture -->
 <img src="profile.jpg" class="profile-img">
 
-<!-- Typing Intro -->
-<h1 class="typing">Hi, I'm 气VENØM三ノ乙</h1>
+<h1>
+Hi, I'm <span class="typing"></span>
+</h1>
 
-<p>Learning, building, and experimenting with code & security.</p>
+<p class="subtitle">
+Learning, building, and experimenting with code & security.
+</p>
 
-<!-- Buttons -->
 <div class="buttons">
-    <a href="http://t.me/BGMI_X_VENOM" target="_blank">
-        <button>Telegram Channel</button>
-    </a>
+<a href="http://t.me/BGMI_X_VENOM" target="_blank">
+<button>Telegram</button>
+</a>
 
-    <a href="https://github.com/BGMIxVENOM" target="_blank">
-        <button>GitHub Profile</button>
-    </a>
+<a href="https://github.com/BGMIxVENOM" target="_blank">
+<button>GitHub</button>
+</a>
+
+<a href="https://www.facebook.com/BGMI.Pritam.Halder" target="_blank">
+<button>Facebook</button>
+</a>
+
+<a href="https://wa.me/916289716808" target="_blank">
+<button>WhatsApp</button>
+</a>
 </div>
 
-<!-- About Section -->
 <div class="about">
-    <h2>About Me</h2>
-    <p>
-        I'm passionate about cybersecurity, Android modification,
-        and experimenting with custom ROMs & kernels.
-        Currently exploring ethical hacking and advanced system tweaks.
-    </p>
-</div>
-
-<!-- Skills -->
-<div class="skill">
-    <div class="skill-name">Cybersecurity</div>
-    <div class="skill-bar">
-        <div class="skill-level skill1"></div>
-    </div>
+<h2>About Me</h2>
+<p>
+I'm passionate about cybersecurity, Android modification,
+and experimenting with custom ROMs & kernels.
+Currently exploring ethical hacking and advanced system tweaks.
+</p>
 </div>
 
 <div class="skill">
-    <div class="skill-name">HTML / CSS</div>
-    <div class="skill-bar">
-        <div class="skill-level skill2"></div>
-    </div>
+<div class="skill-name">Cybersecurity</div>
+<div class="skill-bar">
+<div class="skill-level skill1"></div>
+</div>
 </div>
 
 <div class="skill">
-    <div class="skill-name">Android Modding</div>
-    <div class="skill-bar">
-        <div class="skill-level skill3"></div>
-    </div>
+<div class="skill-name">HTML / CSS</div>
+<div class="skill-bar">
+<div class="skill-level skill2"></div>
+</div>
 </div>
 
-<!-- Terminal -->
+<div class="skill">
+<div class="skill-name">Android Modding</div>
+<div class="skill-bar">
+<div class="skill-level skill3"></div>
+</div>
+</div>
+
 <div class="terminal">
 $ whoami <br>
 气VENØM三ノ乙 <br><br>
@@ -220,6 +221,21 @@ Learning. Building. Evolving.
 </div>
 
 </div>
+
+<script>
+const text="气VENØM三ノ乙";
+let i=0;
+const speed=100;
+
+function typeEffect(){
+    if(i<text.length){
+        document.querySelector(".typing").innerHTML+=text.charAt(i);
+        i++;
+        setTimeout(typeEffect,speed);
+    }
+}
+window.onload=typeEffect;
+</script>
 
 </body>
 </html>
