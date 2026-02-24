@@ -3,150 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>气VENØM三ノ乙 | Portfolio</title>
+<title>气VENØM三ノ乙 | Cyber Portfolio</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    background:#0b0f14;
-    font-family:Arial, sans-serif;
-    color:#00ffcc;
-    text-align:center;
-    overflow-x:hidden;
+background:#050505;
+color:#00ffcc;
+font-family:Arial, sans-serif;
+text-align:center;
+overflow-x:hidden;
 }
 
-/* Animated Grid Background */
+/* MATRIX GRID BACKGROUND */
 body::before{
-    content:"";
-    position:fixed;
-    width:200%;
-    height:200%;
-    background:
-        radial-gradient(circle, rgba(0,255,204,0.08) 1px, transparent 1px);
-    background-size:40px 40px;
-    animation:moveBg 25s linear infinite;
-    z-index:-1;
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle, rgba(0,255,150,0.15) 1px, transparent 1px);
+background-size:35px 35px;
+animation:moveBg 20s linear infinite;
+z-index:-1;
 }
 
 @keyframes moveBg{
-    from{transform:translate(0,0);}
-    to{transform:translate(-40px,-40px);}
+from{transform:translate(0,0);}
+to{transform:translate(-35px,-35px);}
 }
 
 .container{
-    padding:60px 20px;
+padding:60px 20px;
 }
 
-/* Profile Image */
+/* PROFILE IMAGE */
 .profile-img{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    border:3px solid #00ffcc;
-    box-shadow:0 0 25px #00ffcc;
-    margin-bottom:25px;
+width:150px;
+height:150px;
+border-radius:50%;
+border:3px solid #00ffcc;
+box-shadow:0 0 25px #00ffcc;
+margin-bottom:25px;
 }
 
-/* Typing Effect */
-h1{
-    font-size:40px;
-    margin-bottom:15px;
+/* GLITCH EFFECT */
+.glitch{
+position:relative;
+font-size:38px;
+font-weight:bold;
+color:#00ffcc;
+animation:flicker 2s infinite;
 }
 
-.typing{
-    background:linear-gradient(90deg,#00ffcc,#00aaff);
-    -webkit-background-clip:text;
-    color:transparent;
-    border-right:3px solid #00ffcc;
-    padding-right:6px;
+.glitch::before,
+.glitch::after{
+content:attr(data-text);
+position:absolute;
+left:0;
+width:100%;
+overflow:hidden;
 }
 
-/* Subtitle */
+.glitch::before{
+animation:glitchTop 2s infinite linear alternate-reverse;
+color:#ff00ff;
+z-index:-1;
+}
+
+.glitch::after{
+animation:glitchBottom 1.5s infinite linear alternate-reverse;
+color:#00ffff;
+z-index:-2;
+}
+
+@keyframes glitchTop{
+0%{clip-path:inset(0 0 80% 0);transform:translate(-2px,-2px);}
+25%{clip-path:inset(10% 0 60% 0);transform:translate(2px,2px);}
+50%{clip-path:inset(40% 0 30% 0);transform:translate(-2px,1px);}
+75%{clip-path:inset(60% 0 10% 0);transform:translate(2px,-1px);}
+100%{clip-path:inset(0 0 80% 0);transform:translate(0);}
+}
+
+@keyframes glitchBottom{
+0%{clip-path:inset(80% 0 0 0);transform:translate(2px,2px);}
+25%{clip-path:inset(60% 0 20% 0);transform:translate(-2px,-2px);}
+50%{clip-path:inset(30% 0 40% 0);transform:translate(1px,-1px);}
+75%{clip-path:inset(10% 0 60% 0);transform:translate(-1px,1px);}
+100%{clip-path:inset(80% 0 0 0);transform:translate(0);}
+}
+
+@keyframes flicker{
+0%,18%,22%,25%,53%,57%,100%{
+opacity:1;
+text-shadow:0 0 10px #00ffcc;
+}
+20%,24%,55%{
+opacity:0.4;
+}
+}
+
+/* SUBTITLE */
 .subtitle{
-    color:#aaa;
-    margin-bottom:35px;
-    font-size:18px;
+color:#aaa;
+margin:15px 0 30px;
 }
 
-/* Buttons */
+/* BUTTONS */
 .buttons{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-bottom:50px;
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:40px;
 }
 
 button{
-    padding:12px 25px;
-    font-size:15px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:bold;
-    background:#00ffcc;
-    transition:0.3s;
+padding:12px 25px;
+font-size:15px;
+background:#00ffcc;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
 }
 
 button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 20px #00ffcc;
+transform:scale(1.05);
+box-shadow:0 0 15px #00ffcc;
 }
 
-/* About Section */
+/* ABOUT */
 .about{
-    max-width:700px;
-    margin:auto;
-    margin-bottom:50px;
-    line-height:1.6;
+max-width:700px;
+margin:auto;
+margin-bottom:40px;
+line-height:1.6;
+color:#ccc;
 }
 
-/* Skills */
+/* SKILLS */
 .skill{
-    max-width:500px;
-    margin:20px auto;
-    text-align:left;
+margin:15px auto;
+max-width:400px;
+text-align:left;
 }
 
 .skill-name{
-    margin-bottom:5px;
+margin-bottom:5px;
 }
 
 .skill-bar{
-    background:#222;
-    border-radius:20px;
-    overflow:hidden;
+background:#222;
+border-radius:20px;
+overflow:hidden;
 }
 
 .skill-level{
-    height:10px;
-    background:#00ffcc;
-    width:0;
-    animation:loadSkill 2s forwards;
+height:10px;
+background:#00ffcc;
+width:80%;
 }
 
-.skill1{animation-delay:0.5s;}
-.skill2{animation-delay:1s;}
-.skill3{animation-delay:1.5s;}
-
-@keyframes loadSkill{
-    to{width:80%;}
-}
-
-/* Terminal */
+/* TERMINAL */
 .terminal{
-    background:#0f141b;
-    border:1px solid #00ffcc;
-    padding:20px;
-    max-width:600px;
-    margin:50px auto;
-    font-family:monospace;
-    box-shadow:0 0 20px #00ffcc;
+background:#000;
+border:1px solid #00ffcc;
+padding:20px;
+max-width:600px;
+margin:40px auto;
+font-family:monospace;
+color:#00ffcc;
+box-shadow:0 0 20px #00ffcc;
 }
 </style>
 </head>
@@ -157,8 +191,8 @@ button:hover{
 
 <img src="profile.jpg" class="profile-img">
 
-<h1>
-Hi, I'm <span class="typing"></span>
+<h1 class="glitch" data-text="Hi, I'm 气VENØM三ノ乙">
+Hi, I'm 气VENØM三ノ乙
 </h1>
 
 <p class="subtitle">
@@ -186,31 +220,25 @@ Learning, building, and experimenting with code & security.
 <div class="about">
 <h2>About Me</h2>
 <p>
-I'm passionate about cybersecurity, Android modification,
-and experimenting with custom ROMs & kernels.
+I'm passionate about cybersecurity, Android modification, 
+and experimenting with custom ROMs & kernels. 
 Currently exploring ethical hacking and advanced system tweaks.
 </p>
 </div>
 
 <div class="skill">
 <div class="skill-name">Cybersecurity</div>
-<div class="skill-bar">
-<div class="skill-level skill1"></div>
-</div>
+<div class="skill-bar"><div class="skill-level"></div></div>
 </div>
 
 <div class="skill">
 <div class="skill-name">HTML / CSS</div>
-<div class="skill-bar">
-<div class="skill-level skill2"></div>
-</div>
+<div class="skill-bar"><div class="skill-level"></div></div>
 </div>
 
 <div class="skill">
 <div class="skill-name">Android Modding</div>
-<div class="skill-bar">
-<div class="skill-level skill3"></div>
-</div>
+<div class="skill-bar"><div class="skill-level"></div></div>
 </div>
 
 <div class="terminal">
@@ -221,21 +249,6 @@ Learning. Building. Evolving.
 </div>
 
 </div>
-
-<script>
-const text="气VENØM三ノ乙";
-let i=0;
-const speed=100;
-
-function typeEffect(){
-    if(i<text.length){
-        document.querySelector(".typing").innerHTML+=text.charAt(i);
-        i++;
-        setTimeout(typeEffect,speed);
-    }
-}
-window.onload=typeEffect;
-</script>
 
 </body>
 </html>
