@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>气VENØM三ノ乙 | Cyber Portfolio</title>
+<title>气VENØM三ノ乙 | Cyber Terminal</title>
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Consolas, monospace;
 }
 
 body{
-background:black;
-color:#00f5d4;
+background:#000;
+color:#00ffcc;
+font-family:Arial, sans-serif;
+text-align:center;
 overflow-x:hidden;
 }
 
-/* MATRIX CANVAS */
+/* ===== MATRIX CANVAS ===== */
 canvas{
 position:fixed;
 top:0;
@@ -27,7 +28,7 @@ left:0;
 z-index:-2;
 }
 
-/* SCANLINE OVERLAY */
+/* ===== DIGITAL SCAN LINES ===== */
 body::after{
 content:"";
 position:fixed;
@@ -37,38 +38,74 @@ width:100%;
 height:100%;
 background:repeating-linear-gradient(
 to bottom,
-rgba(0,255,200,0.05) 0px,
-rgba(0,255,200,0.05) 1px,
-transparent 2px,
-transparent 4px
+rgba(0,255,200,0.04) 0px,
+rgba(0,255,200,0.04) 1px,
+transparent 1px,
+transparent 3px
 );
 pointer-events:none;
-z-index:-1;
+z-index:5;
 }
 
-/* LOADING SCREEN */
+/* ===== LOADER ===== */
 #loader{
 position:fixed;
+top:0;
+left:0;
 width:100%;
-height:100vh;
-background:black;
+height:100%;
+background:#000;
 display:flex;
 justify-content:center;
 align-items:center;
-color:#00f5d4;
-font-size:20px;
-z-index:999;
-animation:fadeOut 3s forwards 2.5s;
+flex-direction:column;
+z-index:9999;
+color:#00ffcc;
+font-family:monospace;
+animation:fadeOut 1s ease forwards;
+animation-delay:3s;
+}
+
+.loader-text{
+margin-bottom:15px;
+animation:blink 1s infinite;
+}
+
+.loading-bar{
+width:250px;
+height:6px;
+background:#111;
+border-radius:10px;
+overflow:hidden;
+}
+
+.loading-progress{
+height:100%;
+width:0;
+background:#00ffcc;
+animation:load 3s forwards;
+}
+
+@keyframes load{
+to{width:100%;}
 }
 
 @keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
+to{
+opacity:0;
+visibility:hidden;
+}
 }
 
-/* MAIN CONTAINER */
+@keyframes blink{
+50%{opacity:0.4;}
+}
+
+/* CONTENT */
 .container{
-text-align:center;
-padding:60px 20px;
+padding:80px 20px;
+position:relative;
+z-index:2;
 }
 
 /* PROFILE */
@@ -76,22 +113,25 @@ padding:60px 20px;
 width:150px;
 height:150px;
 border-radius:50%;
-border:3px solid #00f5d4;
-box-shadow:0 0 25px #00f5d4;
-margin-bottom:20px;
+border:3px solid #00ffcc;
+box-shadow:
+0 0 10px #00ffcc,
+0 0 25px #00ffcc;
+margin-bottom:25px;
 }
 
-/* CLEAN CYBER GLITCH */
+/* ===== CLEAN CYBER NAME EFFECT ===== */
 .glitch{
 position:relative;
-font-size:38px;
+font-size:40px;
 font-weight:bold;
-color:#00f5d4;
+color:#00ffcc;
 letter-spacing:2px;
-animation:flicker 3s infinite alternate;
 text-shadow:
-0 0 5px #00f5d4,
-0 0 15px #00f5d4;
+0 0 5px #00ffcc,
+0 0 15px #00ffcc,
+0 0 25px #00ffcc;
+animation:softFlicker 3s infinite alternate;
 }
 
 .glitch::before,
@@ -101,38 +141,37 @@ position:absolute;
 left:0;
 top:0;
 width:100%;
-opacity:0.3;
+opacity:0.25;
 }
 
 .glitch::before{
 color:#00ffff;
-animation:glitchTop 3s infinite alternate;
+animation:glitchShift1 3s infinite alternate;
 }
 
 .glitch::after{
-color:#00ffcc;
-animation:glitchBottom 2.5s infinite alternate;
+color:#00ffaa;
+animation:glitchShift2 2.5s infinite alternate;
 }
 
-@keyframes glitchTop{
+@keyframes glitchShift1{
 0%{transform:translate(0);}
 50%{transform:translate(-1px,1px);}
 100%{transform:translate(0);}
 }
 
-@keyframes glitchBottom{
+@keyframes glitchShift2{
 0%{transform:translate(0);}
 50%{transform:translate(1px,-1px);}
 100%{transform:translate(0);}
 }
 
-@keyframes flicker{
+@keyframes softFlicker{
 0%,100%{opacity:1;}
-50%{opacity:0.9;}
+50%{opacity:0.92;}
 }
 
-/* SUBTEXT */
-.sub{
+.subtitle{
 color:#aaa;
 margin:15px 0 30px;
 }
@@ -141,64 +180,53 @@ margin:15px 0 30px;
 .buttons{
 display:flex;
 justify-content:center;
-flex-wrap:wrap;
 gap:15px;
+flex-wrap:wrap;
 margin-bottom:40px;
 }
 
-.buttons a{
-text-decoration:none;
-}
-
-.buttons button{
+button{
 padding:12px 25px;
+font-size:15px;
+background:#00ffcc;
 border:none;
 border-radius:8px;
-background:#00f5d4;
-color:black;
-font-weight:bold;
 cursor:pointer;
+font-weight:bold;
 transition:0.3s;
 }
 
-.buttons button:hover{
+button:hover{
 transform:scale(1.05);
-box-shadow:0 0 20px #00f5d4;
+box-shadow:0 0 15px #00ffcc;
 }
 
 /* TERMINAL */
 .terminal{
 background:#000;
-border:1px solid #00f5d4;
+border:1px solid #00ffcc;
 padding:20px;
-max-width:650px;
+max-width:600px;
 margin:40px auto;
-text-align:left;
-box-shadow:0 0 20px #00f5d4;
+font-family:monospace;
+color:#00ffcc;
+box-shadow:0 0 20px #00ffcc;
 min-height:120px;
-}
-
-/* Cursor */
-.cursor{
-display:inline-block;
-width:10px;
-background:#00f5d4;
-animation:blink 1s infinite;
-}
-
-@keyframes blink{
-50%{opacity:0;}
+text-align:left;
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-Initializing System...
-</div>
-
 <canvas id="matrix"></canvas>
+
+<div id="loader">
+<div class="loader-text">Booting Cyber Interface...</div>
+<div class="loading-bar">
+<div class="loading-progress"></div>
+</div>
+</div>
 
 <div class="container">
 
@@ -208,10 +236,12 @@ Initializing System...
 Hi, I'm 气VENØM三ノ乙
 </h1>
 
-<p class="sub">Learning, building, and experimenting with code & security.</p>
+<p class="subtitle">
+Learning, building, and experimenting with code & security.
+</p>
 
 <div class="buttons">
-<a href="https://t.me/BGMI_X_VENOM" target="_blank"><button>Telegram</button></a>
+<a href="http://t.me/BGMI_X_VENOM" target="_blank"><button>Telegram</button></a>
 <a href="https://github.com/BGMIxVENOM" target="_blank"><button>GitHub</button></a>
 <a href="https://www.facebook.com/BGMI.Pritam.Halder" target="_blank"><button>Facebook</button></a>
 <a href="https://wa.me/916289716808" target="_blank"><button>WhatsApp</button></a>
@@ -222,45 +252,46 @@ Hi, I'm 气VENØM三ノ乙
 </div>
 
 <script>
+
 /* MATRIX RAIN */
-const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-canvas.height=window.innerHeight;
-canvas.width=window.innerWidth;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-const letters="アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const fontSize=14;
-const columns=canvas.width/fontSize;
-const drops=[];
+const letters = "アァイィウヴエカキクケコサシスセソ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
 
-for(let i=0;i<columns;i++){
-drops[i]=1;
+const drops = [];
+for(let x = 0; x < columns; x++){
+drops[x] = 1;
 }
 
-function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
+function drawMatrix(){
+ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-ctx.fillStyle="#00f5d4";
-ctx.font=fontSize+"px monospace";
+ctx.fillStyle = "#00ffcc";
+ctx.font = fontSize + "px monospace";
 
-for(let i=0;i<drops.length;i++){
-const text=letters.charAt(Math.floor(Math.random()*letters.length));
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+for(let i = 0; i < drops.length; i++){
+const text = letters.charAt(Math.floor(Math.random() * letters.length));
+ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-if(drops[i]*fontSize>canvas.height&&Math.random()>0.975){
-drops[i]=0;
-}
+if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+drops[i] = 0;
+
 drops[i]++;
 }
 }
 
-setInterval(draw,33);
+setInterval(drawMatrix, 35);
 
 /* TERMINAL TYPING */
-const terminal=document.getElementById("terminal");
-const lines=[
+const terminal = document.getElementById("terminal");
+const lines = [
 "$ whoami",
 "气VENØM三ノ乙",
 "",
@@ -270,25 +301,26 @@ const lines=[
 "Learning. Building. Evolving."
 ];
 
-let lineIndex=0;
-let charIndex=0;
+let lineIndex = 0;
+let charIndex = 0;
 
 function typeLine(){
-if(lineIndex<lines.length){
-if(charIndex<lines[lineIndex].length){
-terminal.innerHTML+=lines[lineIndex].charAt(charIndex);
+if(lineIndex < lines.length){
+if(charIndex < lines[lineIndex].length){
+terminal.innerHTML += lines[lineIndex].charAt(charIndex);
 charIndex++;
-setTimeout(typeLine,40);
-}else{
-terminal.innerHTML+="<br>";
+setTimeout(typeLine, 40);
+} else {
+terminal.innerHTML += "<br>";
+charIndex = 0;
 lineIndex++;
-charIndex=0;
-setTimeout(typeLine,400);
+setTimeout(typeLine, 400);
 }
 }
 }
 
-setTimeout(typeLine,1500);
+setTimeout(typeLine, 3500);
+
 </script>
 
 </body>
