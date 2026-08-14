@@ -1,685 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>气VENØM三ノ乙 | Cyber Terminal</title>
+    <meta charset="UTF-8">
 
-<style>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Consolas, monospace;
-}
+    <!-- ============================= -->
+    <!-- PAGE INFORMATION -->
+    <!-- ============================= -->
 
-body{
-    background:#000;
-    color:#00ff41;
-    overflow-x:hidden;
-    text-align:center;
-}
+    <title>气VENØM三ノ乙 | Cyber Terminal</title>
 
-/* ============================= */
-/* MATRIX CANVAS */
-/* ============================= */
+    <meta
+        name="description"
+        content="气VENØM三ノ乙 — Learning, building, and experimenting with code & security."
+    >
 
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-2;
-}
-
-/* ============================= */
-/* LOADER */
-/* ============================= */
-
-#loader{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:999;
-    color:#00ff41;
-}
-
-.loader-text{
-    margin-bottom:20px;
-    font-size:18px;
-    letter-spacing:2px;
-    animation:blink 1s infinite;
-}
-
-.loading-bar{
-    width:260px;
-    height:6px;
-    background:#111;
-    border-radius:5px;
-    overflow:hidden;
-}
-
-.loading-progress{
-    height:100%;
-    width:0%;
-    background:#00ff41;
-    animation:load 3s forwards;
-}
-
-@keyframes load{
-    to{
-        width:100%;
-    }
-}
-
-@keyframes blink{
-    50%{
-        opacity:0.5;
-    }
-}
-
-/* ============================= */
-/* MAIN CONTAINER */
-/* ============================= */
-
-.container{
-    padding:80px 20px;
-    position:relative;
-    z-index:2;
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-}
-
-/* ============================= */
-/* PROFILE */
-/* ============================= */
-
-.profile-img{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    border:3px solid #00ff41;
-    box-shadow:
-        0 0 20px #00ff41,
-        0 0 50px #00ff41;
-    margin:0 auto 25px auto;
-    display:block;
-}
-
-/* ============================= */
-/* GLITCH / SCAN TEXT */
-/* ============================= */
-
-.glitch{
-    position:relative;
-    display:inline-block;
-    font-size:42px;
-    font-weight:bold;
-    color:#00ff41;
-    letter-spacing:2px;
-    text-shadow:
-        0 0 10px #00ff41,
-        0 0 30px #00ff41;
-    overflow:hidden;
-}
-
-.glitch::after{
-    content:"";
-    position:absolute;
-    left:0;
-    width:100%;
-    height:40%;
-
-    background:linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0,255,65,0.8),
-        transparent
-    );
-
-    animation:scan 3s linear infinite;
-    pointer-events:none;
-}
-
-@keyframes scan{
-    0%{
-        top:-50%;
-    }
-
-    100%{
-        top:120%;
-    }
-}
-
-/* ============================= */
-/* SUBTITLE */
-/* ============================= */
-
-.subtitle{
-    color:#00ff41;
-    margin:20px 0 40px;
-    opacity:0.8;
-}
-
-/* ============================= */
-/* BUTTONS */
-/* ============================= */
-
-.buttons{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-bottom:50px;
-    max-width:700px;
-    width:100%;
-}
-
-.buttons a{
-    text-decoration:none;
-}
-
-.buttons button{
-    padding:12px 25px;
-    background:#00ff41;
-    border:none;
-    border-radius:6px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-    color:black;
-}
-
-.buttons button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 20px #00ff41;
-}
-
-/* ============================= */
-/* SPECIAL "THIS IS FOR YOU" */
-/* ============================= */
-
-.special-button{
-    flex-basis:100%;
-    display:flex;
-    justify-content:center;
-    margin-top:5px;
-}
-
-.special-button button{
-    background:#ff1744;
-    color:white;
-    padding:12px 30px;
-
-    box-shadow:
-        0 0 12px rgba(255,23,68,0.6);
-}
-
-.special-button button:hover{
-    transform:scale(1.08);
-
-    box-shadow:
-        0 0 20px #ff1744,
-        0 0 40px rgba(255,23,68,0.5);
-}
-
-/* ============================= */
-/* TERMINAL */
-/* ============================= */
-
-.terminal{
-    background:#000;
-    border:1px solid #00ff41;
-    padding:20px;
-    max-width:650px;
-    width:100%;
-    margin:40px auto;
-    text-align:left;
-
-    box-shadow:
-        0 0 25px #00ff41;
-
-    min-height:140px;
-}
-
-/* ============================= */
-/* MOBILE */
-/* ============================= */
-
-@media(max-width:600px){
-
-    .container{
-        padding:70px 15px;
-    }
-
-    .profile-img{
-        width:130px;
-        height:130px;
-    }
-
-    .glitch{
-        font-size:34px;
-        letter-spacing:1px;
-    }
-
-    .subtitle{
-        font-size:14px;
-        line-height:1.6;
-        margin:18px 0 30px;
-    }
-
-    .buttons{
-        gap:12px;
-        margin-bottom:35px;
-    }
-
-    .buttons button{
-        padding:12px 22px;
-        font-size:14px;
-    }
-
-    .special-button{
-        margin-top:3px;
-    }
-
-    .special-button button{
-        padding:13px 30px;
-        font-size:15px;
-    }
-
-    .terminal{
-        padding:20px;
-        font-size:14px;
-        line-height:1.7;
-    }
-}
-
-/* ============================= */
-/* SMALL PHONES */
-/* ============================= */
-
-@media(max-width:380px){
-
-    .glitch{
-        font-size:29px;
-    }
-
-    .buttons{
-        gap:10px;
-    }
-
-    .buttons button{
-        padding:11px 18px;
-        font-size:13px;
-    }
-
-    .terminal{
-        font-size:12px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- ============================= -->
-<!-- LOADER -->
-<!-- ============================= -->
-
-<div id="loader">
-
-    <div class="loader-text">
-        LOADING 气VENØM三ノ乙 WEB...
-    </div>
-
-    <div class="loading-bar">
-        <div class="loading-progress"></div>
-    </div>
-
-</div>
-
-
-<!-- ============================= -->
-<!-- MATRIX -->
-<!-- ============================= -->
-
-<canvas id="matrix"></canvas>
-
-
-<!-- ============================= -->
-<!-- MAIN CONTENT -->
-<!-- ============================= -->
-
-<div class="container" id="mainContent">
-
-    <!-- PROFILE -->
-    <img
-        src="profile.jpg"
-        class="profile-img"
-        alt="气VENØM三ノ乙"
+    <meta
+        name="author"
+        content="气VENØM三ノ乙"
     >
 
 
-    <!-- NAME -->
-    <h1 class="glitch">
-        气VENØM三ノ乙
-    </h1>
+    <!-- ============================= -->
+    <!-- FAVICON -->
+    <!-- ============================= -->
 
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
 
-    <!-- SUBTITLE -->
-    <p class="subtitle">
-        Learning, building, and experimenting with code &amp; security.
-    </p>
+    <link
+        rel="apple-touch-icon"
+        href="favicon.png"
+    >
 
 
     <!-- ============================= -->
-    <!-- BUTTONS -->
+    <!-- OPEN GRAPH / WHATSAPP / FACEBOOK -->
     <!-- ============================= -->
 
-    <div class="buttons">
+    <meta
+        property="og:title"
+        content="气VENØM三ノ乙 | Cyber Terminal"
+    >
 
-        <a
-            href="https://t.me/BGMI_X_VENOM"
-            target="_blank"
-        >
-            <button>
-                Telegram
-            </button>
-        </a>
+    <meta
+        property="og:description"
+        content="Learning, building, and experimenting with code & security."
+    >
 
+    <meta
+        property="og:image"
+        content="https://bgmixvenom.github.io/BGMIxVENOM.github.io/preview.png"
+    >
 
-        <a
-            href="https://github.com/BGMIxVENOM"
-            target="_blank"
-        >
-            <button>
-                GitHub
-            </button>
-        </a>
+    <meta
+        property="og:url"
+        content="https://bgmixvenom.github.io/BGMIxVENOM.github.io/"
+    >
 
-
-        <a
-            href="https://www.facebook.com/BGMI.Pritam.Halder"
-            target="_blank"
-        >
-            <button>
-                Facebook
-            </button>
-        </a>
+    <meta
+        property="og:type"
+        content="website"
+    >
 
 
-        <a
-            href="https://wa.me/916289716808"
-            target="_blank"
-        >
-            <button>
-                WhatsApp
-            </button>
-        </a>
+    <!-- ============================= -->
+    <!-- TWITTER / X PREVIEW -->
+    <!-- ============================= -->
+
+    <meta
+        name="twitter:card"
+        content="summary_large_image"
+    >
+
+    <meta
+        name="twitter:title"
+        content="气VENØM三ノ乙 | Cyber Terminal"
+    >
+
+    <meta
+        name="twitter:description"
+        content="Learning, building, and experimenting with code & security."
+    >
+
+    <meta
+        name="twitter:image"
+        content="https://bgmixvenom.github.io/BGMIxVENOM.github.io/preview.png"
+    >
 
 
-        <!-- ============================= -->
-        <!-- SPECIAL BUTTON -->
-        <!-- ============================= -->
+    <!-- ============================= -->
+    <!-- STYLES -->
+    <!-- ============================= -->
 
-        <a
-            href="https://bgmixvenom.github.io/for-you/"
-            target="_blank"
-            class="special-button"
-        >
-            <button>
-                ❤️ This one is for you ❤️ 
-            </button>
-        </a>
+    <style>
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Consolas, monospace;
+        }
+
+
+        body {
+            background: #000;
+            color: #00ff41;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+
+        /* ============================= */
+        /* MATRIX CANVAS */
+        /* ============================= */
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -2;
+        }
+
+
+        /* ============================= */
+        /* LOADER */
+        /* ============================= */
+
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+
+            background: #000;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            z-index: 999;
+
+            color: #00ff41;
+        }
+
+
+        .loader-text {
+            margin-bottom: 20px;
+
+            font-size: 18px;
+
+            letter-spacing: 2px;
+
+            animation: blink 1s infinite;
+        }
+
+
+        .loading-bar {
+            width: 260px;
+            height: 6px;
+
+            background: #111;
+
+            border-radius: 5px;
+
+            overflow: hidden;
+        }
+
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+
+            background: #00ff41;
+
+            animation: load 3s forwards;
+        }
+
+
+        @keyframes load {
+
+            to {
+                width: 100%;
+            }
+
+        }
+
+
+        @keyframes blink {
+
+            50% {
+                opacity: 0.5;
+            }
+
+        }
+
+
+        /* ============================= */
+        /* MAIN CONTAINER */
+        /* ============================= */
+
+        .container {
+            padding: 80px 20px;
+
+            position: relative;
+
+            z-index: 2;
+
+            display: none;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+        }
+
+
+        /* ============================= */
+        /* PROFILE */
+        /* ============================= */
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+
+            border-radius: 50%;
+
+            border: 3px solid #00ff41;
+
+            box-shadow:
+                0 0 20px #00ff41,
+                0 0 50px #00ff41;
+
+            margin: 0 auto 25px auto;
+
+            display: block;
+        }
+
+
+        /* ============================= */
+        /* GLITCH / SCAN TEXT */
+        /* ============================= */
+
+        .glitch {
+            position: relative;
+
+            display: inline-block;
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            color: #00ff41;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px #00ff41,
+                0 0 30px #00ff41;
+
+            overflow: hidden;
+        }
+
+
+        .glitch::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            width: 100%;
+            height: 40%;
+
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                rgba(0,255,65,0.8),
+                transparent
+            );
+
+            animation: scan 3s linear infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes scan {
+
+            0% {
+                top: -50%;
+            }
+
+            100% {
+                top: 120%;
+            }
+
+        }
+
+
+        /* ============================= */
+        /* SUBTITLE */
+        /* ============================= */
+
+        .subtitle {
+            color: #00ff41;
+
+            margin: 20px 0 40px;
+
+            opacity: 0.8;
+        }
+
+
+        /* ============================= */
+        /* BUTTONS */
+        /* ============================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 15px;
+
+            margin-bottom: 50px;
+
+            max-width: 700px;
+
+            width: 100%;
+        }
+
+
+        .buttons a {
+            text-decoration: none;
+        }
+
+
+        .buttons button {
+            padding: 12px 25px;
+
+            background: #00ff41;
+
+            border: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            color: black;
+        }
+
+
+        .buttons button:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 20px #00ff41;
+        }
+
+
+        /* ============================= */
+        /* SPECIAL "THIS IS FOR YOU" */
+        /* ============================= */
+
+        .special-button {
+            flex-basis: 100%;
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-top: 5px;
+        }
+
+
+        .special-button button {
+            background: #ff1744;
+
+            color: white;
+
+            padding: 12px 30px;
+
+            box-shadow:
+                0 0 12px rgba(255,23,68,0.6);
+        }
+
+
+        .special-button button:hover {
+            transform: scale(1.08);
+
+            box-shadow:
+                0 0 20px #ff1744,
+                0 0 40px rgba(255,23,68,0.5);
+        }
+
+
+        /* ============================= */
+        /* TERMINAL */
+        /* ============================= */
+
+        .terminal {
+            background: #000;
+
+            border: 1px solid #00ff41;
+
+            padding: 20px;
+
+            max-width: 650px;
+
+            width: 100%;
+
+            margin: 40px auto;
+
+            text-align: left;
+
+            box-shadow:
+                0 0 25px #00ff41;
+
+            min-height: 140px;
+        }
+
+
+        /* ============================= */
+        /* MOBILE */
+        /* ============================= */
+
+        @media(max-width:600px) {
+
+            .container {
+                padding: 70px 15px;
+            }
+
+
+            .profile-img {
+                width: 130px;
+                height: 130px;
+            }
+
+
+            .glitch {
+                font-size: 34px;
+
+                letter-spacing: 1px;
+            }
+
+
+            .subtitle {
+                font-size: 14px;
+
+                line-height: 1.6;
+
+                margin: 18px 0 30px;
+            }
+
+
+            .buttons {
+                gap: 12px;
+
+                margin-bottom: 35px;
+            }
+
+
+            .buttons button {
+                padding: 12px 22px;
+
+                font-size: 14px;
+            }
+
+
+            .special-button {
+                margin-top: 3px;
+            }
+
+
+            .special-button button {
+                padding: 13px 30px;
+
+                font-size: 15px;
+            }
+
+
+            .terminal {
+                padding: 20px;
+
+                font-size: 14px;
+
+                line-height: 1.7;
+            }
+
+        }
+
+
+        /* ============================= */
+        /* SMALL PHONES */
+        /* ============================= */
+
+        @media(max-width:380px) {
+
+            .glitch {
+                font-size: 29px;
+            }
+
+
+            .buttons {
+                gap: 10px;
+            }
+
+
+            .buttons button {
+                padding: 11px 18px;
+
+                font-size: 13px;
+            }
+
+
+            .terminal {
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- LOADER -->
+    <!-- ============================= -->
+
+    <div id="loader">
+
+        <div class="loader-text">
+            LOADING 气VENØM三ノ乙 WEB...
+        </div>
+
+        <div class="loading-bar">
+
+            <div class="loading-progress"></div>
+
+        </div>
 
     </div>
 
 
     <!-- ============================= -->
-    <!-- TERMINAL -->
+    <!-- MATRIX -->
+    <!-- ============================= -->
+
+    <canvas id="matrix"></canvas>
+
+
+    <!-- ============================= -->
+    <!-- MAIN CONTENT -->
     <!-- ============================= -->
 
     <div
-        class="terminal"
-        id="terminal"
-    ></div>
+        class="container"
+        id="mainContent"
+    >
 
-</div>
 
+        <!-- PROFILE -->
 
-<script>
+        <img
+            src="profile.jpg"
+            class="profile-img"
+            alt="气VENØM三ノ乙"
+        >
 
-/* ============================= */
-/* LOADER CONTROL */
-/* ============================= */
 
-setTimeout(() => {
+        <!-- NAME -->
 
-    document.getElementById("loader").style.display = "none";
+        <h1 class="glitch">
+            气VENØM三ノ乙
+        </h1>
 
-    document.getElementById("mainContent").style.display = "flex";
 
-}, 3000);
+        <!-- SUBTITLE -->
 
+        <p class="subtitle">
+            Learning, building, and experimenting with code &amp; security.
+        </p>
 
-/* ============================= */
-/* MATRIX RAIN */
-/* ============================= */
 
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
+        <!-- ============================= -->
+        <!-- BUTTONS -->
+        <!-- ============================= -->
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+        <div class="buttons">
 
-const letters =
-    "アカサタナハマヤラ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-const fontSize = 14;
+            <!-- TELEGRAM -->
 
-const columns = canvas.width / fontSize;
+            <a
+                href="https://t.me/BGMI_X_VENOM"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-const drops = [];
+                <button>
+                    Telegram
+                </button>
 
-for(let i = 0; i < columns; i++){
+            </a>
 
-    drops[i] = 1;
 
-}
+            <!-- GITHUB -->
 
+            <a
+                href="https://github.com/BGMIxVENOM"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-/* ============================= */
-/* MATRIX DRAW */
-/* ============================= */
+                <button>
+                    GitHub
+                </button>
 
-function draw(){
+            </a>
 
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
 
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+            <!-- FACEBOOK -->
 
+            <a
+                href="https://www.facebook.com/BGMI.Pritam.Halder"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
-    ctx.fillStyle = "#00ff41";
+                <button>
+                    Facebook
+                </button>
 
-    ctx.font = fontSize + "px monospace";
+            </a>
 
 
-    for(let i = 0; i < drops.length; i++){
+            <!-- WHATSAPP -->
 
-        const text =
-            letters.charAt(
-                Math.floor(
-                    Math.random() * letters.length
-                )
-            );
+            <a
+                href="https://wa.me/916289716808"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
 
+                <button>
+                    WhatsApp
+                </button>
 
-        ctx.fillText(
-            text,
-            i * fontSize,
-            drops[i] * fontSize
-        );
+            </a>
 
 
-        if(
-            drops[i] * fontSize > canvas.height &&
-            Math.random() > 0.975
-        ){
+            <!-- ============================= -->
+            <!-- SPECIAL BUTTON -->
+            <!-- ============================= -->
 
-            drops[i] = 0;
+            <a
+                href="https://bgmixvenom.github.io/for-you/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="special-button"
+            >
 
-        }
+                <button>
+                    ❤️ This one is for you ❤️
+                </button>
 
+            </a>
 
-        drops[i]++;
 
-    }
+        </div>
 
-}
 
+        <!-- ============================= -->
+        <!-- TERMINAL -->
+        <!-- ============================= -->
 
-/* Matrix speed */
+        <div
+            class="terminal"
+            id="terminal"
+        ></div>
 
-setInterval(draw, 33);
 
+    </div>
 
-/* ============================= */
-/* TERMINAL TYPING */
-/* ============================= */
 
-const terminal =
-    document.getElementById("terminal");
+    <!-- ============================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================= -->
 
+    <script>
 
-const lines = [
 
-    "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
+        /* ============================= */
+        /* LOADER CONTROL */
+        /* ============================= */
 
-    "　$ whoami",
+        setTimeout(() => {
 
-    "　气VENØM三ノ乙",
+            document.getElementById("loader").style.display = "none";
 
-    "",
+            document.getElementById("mainContent").style.display = "flex";
 
-    "　$ status",
+        }, 3000);
 
-    "　气VENØM三ノ乙 system online...",
 
-    "",
 
-    "　Learning. Building. Evolving.",
+        /* ============================= */
+        /* MATRIX RAIN */
+        /* ============================= */
 
-    "",
+        const canvas =
+            document.getElementById("matrix");
 
-    "",
+        const ctx =
+            canvas.getContext("2d");
 
-    "　　　　　Access granted...",
-
-    "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
-
-    "",
-
-    "",
-
-    "　　　　　　　　　　　　　Authorised by",
-
-    "　　　　　　　　　　　　　气VENØM三ノ乙"
-
-];
-
-
-let lineIndex = 0;
-
-let charIndex = 0;
-
-
-/* ============================= */
-/* TYPE EACH LINE */
-/* ============================= */
-
-function typeLine(){
-
-    if(lineIndex < lines.length){
-
-        if(
-            charIndex <
-            lines[lineIndex].length
-        ){
-
-            terminal.innerHTML +=
-                lines[lineIndex].charAt(charIndex);
-
-            charIndex++;
-
-            setTimeout(
-                typeLine,
-                40
-            );
-
-        }
-
-        else{
-
-            terminal.innerHTML += "<br>";
-
-            lineIndex++;
-
-            charIndex = 0;
-
-            setTimeout(
-                typeLine,
-                400
-            );
-
-        }
-
-    }
-
-}
-
-
-/* Start terminal after loader */
-
-setTimeout(
-    typeLine,
-    3500
-);
-
-
-/* ============================= */
-/* RESPONSIVE MATRIX */
-/* ============================= */
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        canvas.width =
-            window.innerWidth;
 
         canvas.height =
             window.innerHeight;
 
-    }
-);
+        canvas.width =
+            window.innerWidth;
 
-</script>
+
+        const letters =
+            "アカサタナハマヤラ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+        const fontSize = 14;
+
+
+        const columns =
+            Math.floor(canvas.width / fontSize);
+
+
+        const drops = [];
+
+
+        for(let i = 0; i < columns; i++){
+
+            drops[i] = 1;
+
+        }
+
+
+
+        /* ============================= */
+        /* MATRIX DRAW */
+        /* ============================= */
+
+        function draw(){
+
+            ctx.fillStyle =
+                "rgba(0,0,0,0.05)";
+
+
+            ctx.fillRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            ctx.fillStyle =
+                "#00ff41";
+
+
+            ctx.font =
+                fontSize + "px monospace";
+
+
+            for(let i = 0; i < drops.length; i++){
+
+                const text =
+                    letters.charAt(
+                        Math.floor(
+                            Math.random() * letters.length
+                        )
+                    );
+
+
+                ctx.fillText(
+                    text,
+                    i * fontSize,
+                    drops[i] * fontSize
+                );
+
+
+                if(
+                    drops[i] * fontSize > canvas.height &&
+                    Math.random() > 0.975
+                ){
+
+                    drops[i] = 0;
+
+                }
+
+
+                drops[i]++;
+
+            }
+
+        }
+
+
+        /* Matrix speed */
+
+        setInterval(
+            draw,
+            33
+        );
+
+
+
+        /* ============================= */
+        /* TERMINAL TYPING */
+        /* ============================= */
+
+        const terminal =
+            document.getElementById("terminal");
+
+
+        const lines = [
+
+            "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
+
+            "　$ whoami",
+
+            "　气VENØM三ノ乙",
+
+            "",
+
+            "　$ status",
+
+            "　气VENØM三ノ乙 system online...",
+
+            "",
+
+            "　Learning. Building. Evolving.",
+
+            "",
+
+            "",
+
+            "　　　　　Access granted...",
+
+            "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
+
+            "",
+
+            "",
+
+            "　　　　　　　　　　　　　Authorised by",
+
+            "　　　　　　　　　　　　　气VENØM三ノ乙"
+
+        ];
+
+
+        let lineIndex = 0;
+
+        let charIndex = 0;
+
+
+
+        /* ============================= */
+        /* TYPE EACH LINE */
+        /* ============================= */
+
+        function typeLine(){
+
+            if(lineIndex < lines.length){
+
+                if(
+                    charIndex <
+                    lines[lineIndex].length
+                ){
+
+                    terminal.innerHTML +=
+                        lines[lineIndex].charAt(charIndex);
+
+                    charIndex++;
+
+
+                    setTimeout(
+                        typeLine,
+                        40
+                    );
+
+                }
+
+                else{
+
+                    terminal.innerHTML +=
+                        "<br>";
+
+                    lineIndex++;
+
+                    charIndex = 0;
+
+
+                    setTimeout(
+                        typeLine,
+                        400
+                    );
+
+                }
+
+            }
+
+        }
+
+
+
+        /* Start terminal after loader */
+
+        setTimeout(
+            typeLine,
+            3500
+        );
+
+
+
+        /* ============================= */
+        /* RESPONSIVE MATRIX */
+        /* ============================= */
+
+        window.addEventListener(
+            "resize",
+            () => {
+
+                canvas.width =
+                    window.innerWidth;
+
+                canvas.height =
+                    window.innerHeight;
+
+            }
+        );
+
+
+    </script>
+
 
 </body>
+
 </html>
