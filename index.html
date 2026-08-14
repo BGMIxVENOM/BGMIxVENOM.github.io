@@ -77,7 +77,7 @@ to{width:100%;}
 padding:80px 20px;
 position:relative;
 z-index:2;
-display:none; /* hidden until loader ends */
+display:none;
 flex-direction:column;
 align-items:center;
 justify-content:center;
@@ -95,7 +95,7 @@ margin:0 auto 25px auto;
 display:block;
 }
 
-/* ===== TEXT SCAN EFFECT (ONLY INSIDE TEXT) ===== */
+/* ===== TEXT SCAN EFFECT ===== */
 .glitch{
 position:relative;
 display:inline-block;
@@ -163,6 +163,22 @@ transform:scale(1.08);
 box-shadow:0 0 20px #00ff41;
 }
 
+/* ===== SPECIAL "FOR YOU" BUTTON ===== */
+.special-button{
+background:#ff1744 !important;
+color:white !important;
+box-shadow:
+0 0 10px rgba(255,23,68,0.6),
+0 0 20px rgba(255,23,68,0.3);
+}
+
+.special-button:hover{
+transform:scale(1.08);
+box-shadow:
+0 0 20px #ff1744,
+0 0 40px rgba(255,23,68,0.5);
+}
+
 /* TERMINAL */
 .terminal{
 background:#000;
@@ -182,6 +198,7 @@ min-height:140px;
 <!-- LOADER -->
 <div id="loader">
 <div class="loader-text">LOADING 气VENØM三ノ乙 WEB...</div>
+
 <div class="loading-bar">
 <div class="loading-progress"></div>
 </div>
@@ -200,11 +217,29 @@ min-height:140px;
 Learning, building, and experimenting with code & security.
 </p>
 
+<!-- BUTTONS -->
 <div class="buttons">
-<a href="https://t.me/BGMI_X_VENOM" target="_blank"><button>Telegram</button></a>
-<a href="https://github.com/BGMIxVENOM" target="_blank"><button>GitHub</button></a>
-<a href="https://www.facebook.com/BGMI.Pritam.Halder" target="_blank"><button>Facebook</button></a>
-<a href="https://wa.me/916289716808" target="_blank"><button>WhatsApp</button></a>
+
+<a href="https://bgmixvenom.github.io/for-you/" target="_blank">
+<button class="special-button">❤️ This is for you</button>
+</a>
+
+<a href="https://t.me/BGMI_X_VENOM" target="_blank">
+<button>Telegram</button>
+</a>
+
+<a href="https://github.com/BGMIxVENOM" target="_blank">
+<button>GitHub</button>
+</a>
+
+<a href="https://www.facebook.com/BGMI.Pritam.Halder" target="_blank">
+<button>Facebook</button>
+</a>
+
+<a href="https://wa.me/916289716808" target="_blank">
+<button>WhatsApp</button>
+</a>
+
 </div>
 
 <div class="terminal" id="terminal"></div>
@@ -243,12 +278,24 @@ ctx.fillStyle="#00ff41";
 ctx.font=fontSize+"px monospace";
 
 for(let i=0;i<drops.length;i++){
-const text=letters.charAt(Math.floor(Math.random()*letters.length));
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
 
-if(drops[i]*fontSize>canvas.height&&Math.random()>0.975){
+const text=letters.charAt(
+Math.floor(Math.random()*letters.length)
+);
+
+ctx.fillText(
+text,
+i*fontSize,
+drops[i]*fontSize
+);
+
+if(
+drops[i]*fontSize>canvas.height &&
+Math.random()>0.975
+){
 drops[i]=0;
 }
+
 drops[i]++;
 }
 }
@@ -257,6 +304,7 @@ setInterval(draw,33);
 
 /* TERMINAL TYPING */
 const terminal=document.getElementById("terminal");
+
 const lines=[
 "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
 "　$ whoami",
@@ -270,25 +318,35 @@ const lines=[
 "",
 "　　　　　Access granted...",
 "✪═━━━━━━━━━━━━━━━━━━━━━━━━━━━━━═✪",
-  "",
-  "",
- "　　　　　　　　　　　　　Authorised by",
- "　　　　　　　　　　　　　气VENØM三ノ乙"
+"",
+"",
+"　　　　　　　　　　　　　Authorised by",
+"　　　　　　　　　　　　　气VENØM三ノ乙"
 ];
 
 let lineIndex=0;
 let charIndex=0;
 
 function typeLine(){
+
 if(lineIndex<lines.length){
+
 if(charIndex<lines[lineIndex].length){
-terminal.innerHTML+=lines[lineIndex].charAt(charIndex);
+
+terminal.innerHTML+=
+lines[lineIndex].charAt(charIndex);
+
 charIndex++;
+
 setTimeout(typeLine,40);
+
 }else{
+
 terminal.innerHTML+="<br>";
+
 lineIndex++;
 charIndex=0;
+
 setTimeout(typeLine,400);
 }
 }
@@ -300,15 +358,3 @@ setTimeout(typeLine,3500);
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
